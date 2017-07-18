@@ -1,0 +1,31 @@
+﻿@model HApp.Hotel
+@{
+    ViewBag.Title = "Описание";
+}
+
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <img src="~/ImageH/@ViewBag.index .jpg" style="width:100%" class="block1" />
+    </div>
+</div>
+<div class="row">
+    <div class="block2 col-lg-12">
+        <div class="name-h">
+            <h3>@Html.DisplayFor(model => model.nameH) @Html.DisplayFor(model => model.star)*</h3>
+            <label>Местонахождение: </label> @Html.DisplayFor(model => model.country), @Html.DisplayFor(model => model.town)
+        </div>
+        <div class="block3">
+            <label>Тип отеля:</label> @Model.type <br />
+            <label>Удаленность(от пляжа/центра):</label> @Model.distance м<br />
+            <br />
+            <strong>Описание отеля</strong><br />
+            <p>
+                @Html.DisplayFor(model => model.deck)
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row col-lg-12">
+    @Html.Action("ParticialDescription","Hotels", new { id = Model.catalogHotelsID })
+</div>

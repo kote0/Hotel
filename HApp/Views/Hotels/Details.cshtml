@@ -1,0 +1,82 @@
+﻿@model HApp.Hotel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hotel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nameH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.town)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.town)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.countRooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.countRooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.star)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.star)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deck)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.catalogHotelsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

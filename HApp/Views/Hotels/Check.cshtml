@@ -1,0 +1,35 @@
+﻿@model IEnumerable<HApp.Hotel>
+@{
+    ViewBag.Title = "Check";
+}
+
+<h2>Check</h2>
+
+<select id="one">
+    @foreach (var item in Model)
+    {
+        <option>
+            @Html.DisplayFor(modelItem => item.country)
+        </option>
+    }
+</select>
+<select id="two"></select>
+<script>
+    $('#one')
+    .change(function () {
+        var str = "";
+        $("select option:selected").each(function () {
+            str += $(this).text() + " ";
+            return str;
+            console.log(str);
+        });
+        @foreach (var item in Model)
+     {
+         @:if (@item.country == str)
+         {
+             @:$('#two').append('<option>' +@Html.DisplayTextFor(modelItem => item.town) +'</option>');
+                    
+         }
+    }
+     });
+</script>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище hotelModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CatalogRooms">
+    <Key>
+      <PropertyRef Name="catalogRoomsID" />
+    </Key>
+    <Property Name="catalogRoomsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catalogHotelsID" Type="int" />
+    <Property Name="price" Type="money" />
+    <Property Name="placesNumber" Type="int" />
+    <Property Name="roomQuantity" Type="int" />
+    <Property Name="area" Type="real" />
+    <Property Name="free" Type="bit" />
+  </EntityType>
+  <EntityType Name="Comfort">
+    <Key>
+      <PropertyRef Name="comfortID" />
+    </Key>
+    <Property Name="comfortID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catalogHotelsID" Type="int" />
+    <Property Name="nameComfort" Type="nchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="catalogHotelsID" />
+    </Key>
+    <Property Name="catalogHotelsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameH" Type="nchar" MaxLength="50" />
+    <Property Name="country" Type="nchar" MaxLength="30" />
+    <Property Name="town" Type="nchar" MaxLength="20" />
+    <Property Name="type" Type="nchar" MaxLength="20" />
+    <Property Name="countRooms" Type="int" />
+    <Property Name="star" Type="int" />
+    <Property Name="distance" Type="real" />
+    <Property Name="deck" Type="nchar" MaxLength="700" />
+  </EntityType>
+  <Association Name="FK_CatalogRooms_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="CatalogRooms" Type="Self.CatalogRooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="catalogHotelsID" />
+      </Principal>
+      <Dependent Role="CatalogRooms">
+        <PropertyRef Name="catalogHotelsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище hotelModelContainer">
+    <EntitySet Name="CatalogRooms" EntityType="Self.CatalogRooms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comfort" EntityType="Self.Comfort" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CatalogRooms_Hotel" Association="Self.FK_CatalogRooms_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="CatalogRooms" EntitySet="CatalogRooms" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

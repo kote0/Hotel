@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище hotelModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CatalogRooms">
+          <Key>
+            <PropertyRef Name="catalogRoomsID" />
+          </Key>
+          <Property Name="catalogRoomsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catalogHotelsID" Type="int" />
+          <Property Name="price" Type="money" />
+          <Property Name="placesNumber" Type="int" />
+          <Property Name="roomQuantity" Type="int" />
+          <Property Name="area" Type="real" />
+          <Property Name="free" Type="bit" />
+        </EntityType>
+        <EntityType Name="Comfort">
+          <Key>
+            <PropertyRef Name="comfortID" />
+          </Key>
+          <Property Name="comfortID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catalogHotelsID" Type="int" />
+          <Property Name="nameComfort" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="catalogHotelsID" />
+          </Key>
+          <Property Name="catalogHotelsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameH" Type="nchar" MaxLength="50" />
+          <Property Name="country" Type="nchar" MaxLength="30" />
+          <Property Name="town" Type="nchar" MaxLength="20" />
+          <Property Name="type" Type="nchar" MaxLength="20" />
+          <Property Name="countRooms" Type="int" />
+          <Property Name="star" Type="int" />
+          <Property Name="distance" Type="real" />
+          <Property Name="deck" Type="nchar" MaxLength="700" />
+        </EntityType>
+        <Association Name="FK_CatalogRooms_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="CatalogRooms" Type="Self.CatalogRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="catalogHotelsID" />
+            </Principal>
+            <Dependent Role="CatalogRooms">
+              <PropertyRef Name="catalogHotelsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище hotelModelContainer">
+          <EntitySet Name="CatalogRooms" EntityType="Self.CatalogRooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comfort" EntityType="Self.Comfort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CatalogRooms_Hotel" Association="Self.FK_CatalogRooms_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="CatalogRooms" EntitySet="CatalogRooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="catalogHotelsID" />
+          </Key>
+          <Property Name="catalogHotelsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameH" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="town" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="countRooms" Type="Int32" />
+          <Property Name="star" Type="Int32" />
+          <Property Name="distance" Type="Single" />
+          <Property Name="deck" Type="String" MaxLength="700" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CatalogRooms" Relationship="hotelModel.FK_CatalogRooms_Hotel" FromRole="Hotel" ToRole="CatalogRoom" />
+          <NavigationProperty Name="Comforts" Relationship="hotelModel.FK_Comfort_ToHotel" FromRole="Hotel" ToRole="Comfort" />
+        </EntityType>
+        <EntityContainer Name="hotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+          <EntitySet Name="CatalogRooms" EntityType="hotelModel.CatalogRoom" />
+          <AssociationSet Name="FK_CatalogRooms_Hotel" Association="hotelModel.FK_CatalogRooms_Hotel">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="CatalogRoom" EntitySet="CatalogRooms" />
+          </AssociationSet>
+          <EntitySet Name="Comforts" EntityType="hotelModel.Comfort" />
+          <AssociationSet Name="FK_Comfort_ToHotel" Association="hotelModel.FK_Comfort_ToHotel">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Comfort" EntitySet="Comforts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CatalogRoom">
+          <Key>
+            <PropertyRef Name="catalogRoomsID" />
+          </Key>
+          <Property Name="catalogRoomsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catalogHotelsID" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="placesNumber" Type="Int32" />
+          <Property Name="roomQuantity" Type="Int32" />
+          <Property Name="area" Type="Single" />
+          <Property Name="free" Type="Boolean" />
+          <NavigationProperty Name="Hotel" Relationship="hotelModel.FK_CatalogRooms_Hotel" FromRole="CatalogRoom" ToRole="Hotel" />
+        </EntityType>
+        <Association Name="FK_CatalogRooms_Hotel">
+          <End Type="hotelModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+          <End Type="hotelModel.CatalogRoom" Role="CatalogRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="catalogHotelsID" />
+            </Principal>
+            <Dependent Role="CatalogRoom">
+              <PropertyRef Name="catalogHotelsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comfort">
+          <Key>
+            <PropertyRef Name="comfortID" />
+          </Key>
+          <Property Name="comfortID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catalogHotelsID" Type="Int32" />
+          <Property Name="nameComfort" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Hotel" Relationship="hotelModel.FK_Comfort_ToHotel" FromRole="Comfort" ToRole="Hotel" />
+        </EntityType>
+        <Association Name="FK_Comfort_ToHotel">
+          <End Type="hotelModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+          <End Type="hotelModel.Comfort" Role="Comfort" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="catalogHotelsID" />
+            </Principal>
+            <Dependent Role="Comfort">
+              <PropertyRef Name="catalogHotelsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище hotelModelContainer" CdmEntityContainer="hotelEntities">
+          <EntitySetMapping Name="Hotels">
+            <EntityTypeMapping TypeName="hotelModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="catalogHotelsID" ColumnName="catalogHotelsID" />
+                <ScalarProperty Name="nameH" ColumnName="nameH" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="countRooms" ColumnName="countRooms" />
+                <ScalarProperty Name="star" ColumnName="star" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="deck" ColumnName="deck" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatalogRooms">
+            <EntityTypeMapping TypeName="hotelModel.CatalogRoom">
+              <MappingFragment StoreEntitySet="CatalogRooms">
+                <ScalarProperty Name="free" ColumnName="free" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="roomQuantity" ColumnName="roomQuantity" />
+                <ScalarProperty Name="placesNumber" ColumnName="placesNumber" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="catalogHotelsID" ColumnName="catalogHotelsID" />
+                <ScalarProperty Name="catalogRoomsID" ColumnName="catalogRoomsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comforts">
+            <EntityTypeMapping TypeName="hotelModel.Comfort">
+              <MappingFragment StoreEntitySet="Comfort">
+                <ScalarProperty Name="nameComfort" ColumnName="nameComfort" />
+                <ScalarProperty Name="catalogHotelsID" ColumnName="catalogHotelsID" />
+                <ScalarProperty Name="comfortID" ColumnName="comfortID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,55 @@
+﻿@model HApp.CatalogRoom
+@{
+    ViewBag.Title = "Бронирование";
+}
+@{
+    int l = Model.price.ToString().Length;
+    string pr = Model.price.ToString().Remove(l - 5);
+}
+<h2>Бронирование</h2>
+<div class="row">
+    <form method="post" action="~/Hotels/Reservation">
+        <div class="col-lg-5">
+            <p>
+                <label for="nameUser">Имя</label><br />
+                <input type="text" name="nameUser" class="form-control" />
+            </p>
+
+            <p>
+                <label for="LastNameUser">Фамилия</label><br />
+                <input type="text" name="LastNameUser" class="form-control" />
+            </p>
+            <p>
+                <label for="email">Email</label><br />
+                <input type="email" name="email" class="form-control" />
+            </p>
+            <p>
+                <label for="d">Дата приезда</label><br />
+                <input type="date" name="d" class="form-control" value="" />
+            </p>
+            <label>Цена:</label> @pr  д.е.
+            <br /><br />
+            <div>
+                <input type="button" class="btn btn-success btn-lg" value="Забронировать" name="send" onclick="send()" />
+            </div>
+    </div>
+    </form>
+    <div class="col-lg-7">
+            <img src="~/ImageH/@Model.Hotel.catalogHotelsID .jpg" style="width:100%" />
+        <p>
+            <h3>@Model.Hotel.nameH @Html.DisplayFor(model => model.Hotel.star)*</h3>
+            <label>Местоположение:</label> @Html.DisplayFor(model => model.Hotel.country), @Html.DisplayFor(model => model.Hotel.town)<br />
+            <label>Площадь комнаты:</label> @Model.area м <br />
+            <label>Количество комнат:</label> @Model.roomQuantity <br />
+            <label>Количество гостей:</label> @Model.placesNumber<br />
+        </p>
+    </div>
+</div>
+<script>
+    function send() {
+        alert("Ваша заявка принята. \nСтранно.. Ожидайте ответа от отеля.");
+        @{ 
+            Model.free = false;
+         }
+    }
+</script>

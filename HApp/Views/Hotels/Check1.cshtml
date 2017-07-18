@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HApp.Hotel>
+
+@{
+    ViewBag.Title = "Check1";
+}
+
+<h2>Check1</h2>
+<div class="asa"></div>
+<select id="one">
+    @foreach (var item in Model)
+    {
+        <option>
+            @Html.DisplayFor(modelItem => item.country)
+        </option>
+    }
+</select>
+<select id="two"></select>
+<script type="text/javascript" src="~/">
+
+
+    $('#one').change(function () {
+        var str = "";
+        $("select option:selected").each(function () {
+            str += $(this).text() + " ";
+        });
+        $(".asa").append(str);
+        @{
+            char[] c = { ' ' };
+
+
+            @:var mas = [];
+
+            foreach (var item in Model)
+            {
+                string s = item.country.Trim(c);
+                    @:if (@s === str ) { mas = "@item.town"; }
+            }
+
+            @:mas.forEach(item, i , mas){alert("<option>"+item+"</option>"); }
+            
+        }
+    });
+</script>

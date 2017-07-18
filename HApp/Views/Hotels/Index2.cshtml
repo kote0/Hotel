@@ -1,0 +1,132 @@
+﻿@model IEnumerable<HApp.Hotel>
+
+
+@{ 
+    ViewBag.Title = "Каталог";
+}
+<link href="~/Content/Index2.css" rel="stylesheet" type="text/css" />
+<h2>Каталог отелей</h2>
+<br />
+
+<form method="post" action="~/Hotels/Index2">
+
+    <div class="filtr col-lg-3 col-md-3">
+        <div>
+            <label for="hotel">Название отеля</label><br />
+            <input type="text" name="hotel" class="form-control" />
+        </div>
+        <div>
+            <label for="country">Страна</label><br />
+            <select name="country" class="form-control">
+                <option>Выберите ...</option>
+                <option>Россия</option>
+                <option>Турция</option>
+                <option>Египет</option>
+                <option>Болгария</option>
+                <option>Андорра</option>
+                <option>Словакия</option>
+                <option>Франция</option>
+            </select>
+        </div>
+        <div>
+            <label for="town">Регион(город)</label><br />
+            <select name="town" class="form-control">
+                <option>Выберите ...</option>
+                <option>Кемер</option>
+                <option>Хургада</option>
+                <option>Эстосадок</option>
+                <option>Красная поляна</option>
+                <option>Банско</option>
+                <option>Энкамл</option>
+                <option>Боровец</option>
+                <option>Ла Плань</option>
+            </select>
+        </div>
+        <div>
+            <label for="d">Дата приезда</label><br />
+            <input type="date" name="d" class="form-control" />
+        </div>
+        <div>
+            <label for="d2">Дата отъезда</label><br />
+            <input type="date" name="d2"  class="form-control" />
+        </div>
+        <div>
+            <label for="pr1">Цена от</label><br />
+            <input type="text" name="pr1" class="form-control" />
+        </div>
+        <div>
+            <label for="pr2">Цена до</label><br />
+            <input type="text" name="pr2" class="form-control" />
+        </div>
+        <div>
+            <label for="star">Звезды</label><br />
+            <input type="checkbox" name="star1" value="1" /> 1
+            <input type="checkbox" name="star2" value="2" /> 2
+            <input type="checkbox" name="star3" value="3" /> 3
+            <input type="checkbox" name="star4" value="4" /> 4
+            <input type="checkbox" name="star5" value="5" /> 5
+        </div>
+        <div>
+            <label for="distance">Удаленность(от пляжа/центра)</label><br />
+            <input type="text" name="distance" class="form-control" />
+        </div>
+        <div>
+            <label for="star">Доп. услуги</label><br />
+            <input type="checkbox" name="e" value="Экскурсии" /> Экскурсии <br />
+            <input type="checkbox" name="t" value="Такси до/от аэропорта" /> Такси до/от аэропорта <br />
+            <input type="checkbox" name="b" value="Принимаются банковкие карты" /> Принимаются банковкие карты <br />
+            <input type="checkbox" name="z" value="Завтрак" /> Завтрак <br />
+            <!--<button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Экскурсии">
+                <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Такси до/от аэропорта">
+                <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="<Принимаются банковкие карты">
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Завтрак">
+                <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+            </button>-->
+        </div>
+        <div>
+            <input type="submit" class="btn btn-success btn-lg" value="Показать" name="send" />
+        </div>
+    </div>
+</form>
+
+    <div class="list col-lg-8 col-lg-offset-1">
+        @foreach (var item in Model)
+        {
+            
+            <div class="all">
+                <div class="block1">
+                    <img src="~/ImageH/@item.catalogHotelsID .jpg" class="block1" />
+                </div>
+                <div class="block2">
+                        <div class="name-h">
+                            <a href="Description?i=@item.catalogHotelsID "><h3>@Html.DisplayFor(modelItem => item.nameH) @Html.DisplayFor(modelItem => item.star)*</h3></a>
+                            @Html.DisplayFor(modelItem => item.country), @Html.DisplayFor(modelItem => item.town)
+                        </div>
+                        <label>Дополительные услуги: </label>
+                            @Html.Action("ParticialIndex2", "Hotels", new { id = item.catalogHotelsID })
+                        <div class="block3">
+                            @Html.DisplayFor(modelItem => item.deck)
+                        </div>
+                </div>
+
+            </div>
+
+            <hr />
+
+            
+        }
+    </div>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  
+});
+</script>

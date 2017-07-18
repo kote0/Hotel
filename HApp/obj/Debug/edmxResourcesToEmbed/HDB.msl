@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище hotelModelContainer" CdmEntityContainer="hotelEntities">
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="hotelModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="catalogHotelsID" ColumnName="catalogHotelsID" />
+          <ScalarProperty Name="nameH" ColumnName="nameH" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="town" ColumnName="town" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="countRooms" ColumnName="countRooms" />
+          <ScalarProperty Name="star" ColumnName="star" />
+          <ScalarProperty Name="distance" ColumnName="distance" />
+          <ScalarProperty Name="deck" ColumnName="deck" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CatalogRooms">
+      <EntityTypeMapping TypeName="hotelModel.CatalogRoom">
+        <MappingFragment StoreEntitySet="CatalogRooms">
+          <ScalarProperty Name="free" ColumnName="free" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="roomQuantity" ColumnName="roomQuantity" />
+          <ScalarProperty Name="placesNumber" ColumnName="placesNumber" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="catalogHotelsID" ColumnName="catalogHotelsID" />
+          <ScalarProperty Name="catalogRoomsID" ColumnName="catalogRoomsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comforts">
+      <EntityTypeMapping TypeName="hotelModel.Comfort">
+        <MappingFragment StoreEntitySet="Comfort">
+          <ScalarProperty Name="nameComfort" ColumnName="nameComfort" />
+          <ScalarProperty Name="catalogHotelsID" ColumnName="catalogHotelsID" />
+          <ScalarProperty Name="comfortID" ColumnName="comfortID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

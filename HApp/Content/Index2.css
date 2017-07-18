@@ -1,0 +1,50 @@
+﻿body {
+    text-align:center;
+}
+.filtr, .list {
+    text-align: left;
+}
+.block1 {
+    width:250px;
+    height:170px;
+    float: left;
+    margin-right: 10px;
+}
+.block2{
+    margin-left: 10px;
+    float: none;
+}
+.name-h{
+    margin-right: 10px;
+}
+
+.all{
+    float:none;
+    height:180px;
+}
+.block3{
+    max-height:80px;
+    max-width:600px;
+    overflow:hidden;
+}
+
+
+input[type='text'], select {
+  width: 235px;
+  height: 30px;
+}
+.filtr > div {
+  background: #fff;
+  padding: 10px;
+}
+.filtr {
+  border-radius: 10px;
+  /*-webkit-box-shadow: 1px 1px 26px 0px rgba(50, 50, 50, 0.63);
+  -moz-box-shadow:    1px 1px 26px 0px rgba(50, 50, 50, 0.63);*/
+  box-shadow:         0px 0px 6px rgba(50, 50, 50, 0.63);
+
+}
+a {
+    text-decoration-line: none;
+    color: inherit;
+}

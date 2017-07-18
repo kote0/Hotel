@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HApp.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nameH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.countRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.star)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deck)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nameH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.countRooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.star)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.distance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deck)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.catalogHotelsID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.catalogHotelsID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.catalogHotelsID })
+        </td>
+    </tr>
+}
+
+</table>
